@@ -23,9 +23,11 @@ router.post('/todos', (req, res, next)=>{
     res.status(201).json({message: "added successfully", todo: newTodo});
 });
 
-router.put('/todos:id', (req, res, next)=>{
+router.put('/todos/:id', (req, res, next)=>{
 
     const todoId = req.params.id;
+
+    console.log(todoId + " id is here");
 
     const todoindex = todos.findIndex((todo)=> todo.id === todoId);
 
@@ -34,9 +36,9 @@ router.put('/todos:id', (req, res, next)=>{
     res.status(201).json({message: "successfully updated", todo: todos[todoindex]});
 });
 
-router.delete('/todos:id', (req, res, next)=>{
+router.delete('/todos/:id', (req, res, next)=>{
 
-    todos = todos.filter(todo=> todo.id === req.params.id);
+    todos =  todos.filter(todo=> todo.id !== req.params.id);
 
     res.status(201).json({message: "deleted successfully"});
 })
